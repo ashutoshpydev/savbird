@@ -327,7 +327,7 @@
     <div class="contact_box">
       <div class="row">
         <div class="col-md-6">
-          <form action="">
+          <form action="" name="submit-to-google-sheet">
             <div class="contact_form-container">
               <div>
                 <div>
@@ -344,7 +344,7 @@
                 </div>
                 <div class=" d-flex justify-content-center justify-content-sm-start">
                   <button type="submit">
-                    Send
+                    Submit
                   </button>
                 </div>
               </div>
@@ -352,7 +352,28 @@
             </div>
 
           </form>
+          <span id="msg"></span>
         </div>
+        
+        <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxIItyvwtVHesAuRwJP_r5pjCVoUQFYpsGsGjd4wEOCU2OOtogxaZD-LFENX9rGD8qQ/exec'
+  const form = document.forms['submit-to-google-sheet']
+  const msg = document.getElementById("msg")
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+                        msg.innerHTML = "We will contact you soon !"
+                        setTimeout(function(){
+                          msg.innerHTML = ""
+                        },5000)
+                        form.reset()
+      })
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+        
          <div class="col-md-6">
           <div class="contact_info">
             <a href="https://goo.gl/maps/JLXxy4ZpSKFtXYDa7" target="_blank">
