@@ -299,15 +299,27 @@
       <h4>
         Subscribe Our Newsletter
       </h4>
-      <form action="">
-        <input type="email" placeholder="Enter your email">
+      <form action="" name="submit-to-google-sheet">
+        <input type="email" placeholder="Enter your email" name="Email">
         <button type="submit">
           subscribe
         </button>
       </form>
+      <span> Thank You For Subcribing ! </span>
     </div>
   </section>
 
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyASQfg2o5q4MGK2lf5hPn_Ij1e8hsJ7leabppIv_qLJYNkcbPLQwk5OwcGyFpaZ5yJ/exec'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
 
   <!-- end subscribe section -->
 
