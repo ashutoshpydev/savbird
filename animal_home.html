@@ -355,24 +355,25 @@
     <div class="contact_box">
       <div class="row">
         <div class="col-md-6">
-          <form action="">
+                 <h1 id='msg'></h1>
+          <form action="" name="submit-to-google-sheet"">
             <div class="contact_form-container">
               <div>
                 <div>
-                  <input type="text" placeholder="Your Name">
+                  <input type="text" placeholder="Your Name" name="Name">
                 </div>
                 <div>
-                  <input type="email" placeholder="Email">
+                  <input type="email" placeholder="Email" name="Email">
                 </div>
                 <div>
-                  <input type="text" placeholder="Phone Number">
+                  <input type="text" placeholder="Phone Number" name="Phone">
                 </div>
                 <div class="">
-                  <input type="text" placeholder="Message">
+                  <input type="text" placeholder="Message" name="Message">
                 </div>
                 <div class=" d-flex justify-content-center justify-content-sm-start">
                   <button type="submit">
-                    Send
+                  Submit
                   </button>
                 </div>
               </div>
@@ -380,22 +381,42 @@
             </div>
 
           </form>
+          <span id="msg"></span>
         </div>
+         <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxxNOeurZzqN44YTgnVDfKs5-Mo_AOKK3s_JbJZS6-gvHOkhP06LCFaBlBS8FNLGyLM/exec'
+  const form = document.forms['submit-to-google-sheet']
+  const msg = document.getElementById("msg")
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+                        msg.innerHTML = "We will contact you soon !"
+                        setTimeout(function(){
+                          msg.innerHTML = ""
+                        },5000)
+                        form.reset()
+      })
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>               
+                        
         <div class="col-md-6">
           <div class="contact_info">
-            <a href="">
+            <a href="https://goo.gl/maps/JLXxy4ZpSKFtXYDa7" target="_blank">
               <img src="images/location.png" alt="">
               <span>
                 We will contant you soon :)
               </span>
             </a>
-            <a href="">
+            <a href="tel:9919966995" target="_blank">
               <img src="images/phone.png" alt="">
               <span>
                 +91 9919966995
               </span>
             </a>
-            <a href="">
+            <a href="mailto:ashutosh2418@protonmail.com" target="_blank">
               <img src="images/mail.png" alt="">
               <span>
                 ashutosh2418@protonmail.com
