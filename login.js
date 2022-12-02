@@ -4,7 +4,7 @@ function validate(e) {
 	var password = document.getElementById("password").value;
 	if (username == "ashutosh" && password == "151015") {
 		alert("Login Successfully");
-		window.location.assign("animal_home.html");
+		window.location.assign("contact.html");
 	}
 	else {
 		alert("Please enter a currect username and password");
